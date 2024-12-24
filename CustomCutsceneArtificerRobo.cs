@@ -10,17 +10,17 @@ using UnityEngine;
     {
         public class CustomCutsceneArtificerRobo : UpdatableAndDeletable
         {
-            public CustomCutsceneArtificerRobo(Room room)
+            public CustomCutsceneArtificerRobo(Room room, Vector2 droneCoords, Color droneColor, bool useCoordY)
             {
                 Custom.Log(new string[]
                 {
                 "CUSTOM ARTIFICER BOT CUTSCENE START (CTOR)"
                 });
                 this.room = room;
-                this.useCoordY = false;
+                this.useCoordY = useCoordY;
                 this.SetTriggerCoords(player);
                 this.phase = CustomCutsceneArtificerRobo.Phase.Init;
-                this.bot = new AncientBot(new Vector2(650f, 192f), new Color(228f, 205f, 0f), null, false);
+                this.bot = new AncientBot(droneCoords, droneColor, null, false);
                 room.AddObject(this.bot);
             }
 
@@ -29,9 +29,9 @@ using UnityEngine;
             {
                 base.Update(eu);
             if (this.player == null || this.player?.room == null) return;
-            if (this.player.room.abstractRoom.name != "UW_H01") return;
-            if (this.useCoordY && this.player.mainBodyChunk.pos.x < triggerX1 && this.player.mainBodyChunk.pos.x > triggerX2 && this.player.mainBodyChunk.pos.y > triggerY1 && this.player.mainBodyChunk.pos.y < triggerY2) return;
-            if (this.player.mainBodyChunk.pos.x < triggerX1 && this.player.mainBodyChunk.pos.x > triggerX2) return;
+            if (this.player.room != this.room) return;
+            if (!this.initController && this.useCoordY && (this.player.mainBodyChunk.pos.x < triggerX1 || this.player.mainBodyChunk.pos.x > triggerX2 && this.player.mainBodyChunk.pos.y < triggerY1 || this.player.mainBodyChunk.pos.y > triggerY2)) return;
+            if (!this.initController && (this.player.mainBodyChunk.pos.x < triggerX1 || this.player.mainBodyChunk.pos.x > triggerX2)) return;
 
             if (this.phase == CustomCutsceneArtificerRobo.Phase.Init)
                 {
@@ -52,8 +52,12 @@ using UnityEngine;
                 {
                     if (this.phase == CustomCutsceneArtificerRobo.Phase.ActivateRobo)
                     {
-                        this.cutsceneTimer++;
-                        return;
+                     this.cutsceneTimer++;
+                    if (this.player != null)
+                    {
+                        (this.player.graphicsModule as PlayerGraphics).LookAtPoint(bot.pos, 1f);
+                    }
+                    return;
                     }
                     if (this.phase == CustomCutsceneArtificerRobo.Phase.End)
                     {
@@ -63,7 +67,8 @@ using UnityEngine;
                         });
                         if (this.player != null)
                         {
-                            this.player.controller = null;
+                        (this.player.graphicsModule as PlayerGraphics).LookAtNothing();
+                        this.player.controller = null;
                         }
                         //this.room.game.cameras[0].hud.textPrompt.AddMessage(this.room.game.rainWorld.inGameTranslator.Translate("This ancient device may give you access to new areas."), 20, 500, true, true);
                         this.Destroy();
@@ -114,23 +119,37 @@ using UnityEngine;
 
         public void SetTriggerCoords(Player player)
         {
-            triggerX1 = 630;
-            triggerX2 = 710;
+            triggerX1 = 590;
+            triggerX2 = 620;
             triggerY1 = 0;
             triggerY2 = 0;
             if (player.slugcatStats.name == SlugcatStats.Name.White)
             {
-                triggerX1 = 630;
-                triggerX2 = 710;
+                triggerX1 = 590;
+                triggerX2 = 620;
                 triggerY1 = 0;
                 triggerY2 = 0;
             }
             if (player.slugcatStats.name == SlugcatStats.Name.Yellow)
             {
-                triggerX1 = 630;
-                triggerX2 = 710;
+                triggerX1 = 590;
+                triggerX2 = 620;
                 triggerY1 = 0;
                 triggerY2 = 0;
+            }
+            if (player.slugcatStats.name == SlugcatStats.Name.Red)
+            {
+                triggerX1 = 580;
+                triggerX2 = 680;
+                triggerY1 = 420;
+                triggerY2 = 530;
+            }
+            if (player.slugcatStats.name == MoreSlugcatsEnums.SlugcatStatsName.Gourmand)
+            {
+                triggerX1 = 740;
+                triggerX2 = 830;
+                triggerY1 = 360;
+                triggerY2 = 410;
             }
         }
 

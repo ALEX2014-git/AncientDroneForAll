@@ -25,8 +25,26 @@ namespace AncientDroneForAll
             if (self.room != null && !self.room.game.wasAnArtificerDream && self.room.game.session is StoryGameSession && ((self.AI == null && (self.room.game.session as StoryGameSession).saveState.hasRobo) || (self.AI != null && (self.playerState as PlayerNPCState).Drone)) && (self.myRobot == null || self.myRobot.slatedForDeletetion) && (!ModManager.CoopAvailable || (firstAlivePlayer != null && firstAlivePlayer.realizedCreature != null && firstAlivePlayer.realizedCreature == self)))
             {
                 Creature baseCreature = (Creature)self;
-                self.myRobot = new AncientBot(baseCreature.mainBodyChunk.pos, new Color(228f, 205f, 0f), self, true);
-                self.room.AddObject(self.myRobot);
+                if (self.slugcatStats.name == SlugcatStats.Name.White)
+                {
+                    self.myRobot = new AncientBot(baseCreature.mainBodyChunk.pos, new Color(1f, 1f, 1f), self, true);
+                }
+                if (self.slugcatStats.name == SlugcatStats.Name.Yellow)
+                {
+                    self.myRobot = new AncientBot(baseCreature.mainBodyChunk.pos, new Color(1f, 0.92f, 0.016f), self, true);
+                }
+                if (self.slugcatStats.name == SlugcatStats.Name.Red)
+                {
+                    self.myRobot = new AncientBot(baseCreature.mainBodyChunk.pos, new Color(1f, 0f, 0f), self, true);
+                }
+                if (self.slugcatStats.name == MoreSlugcatsEnums.SlugcatStatsName.Gourmand)
+                {
+                    self.myRobot = new AncientBot(baseCreature.mainBodyChunk.pos, new Color(1f, 1f, 0f), self, true);
+                }
+                if (self.myRobot != null)
+                {
+                    self.room.AddObject(self.myRobot);
+                }
             }
 
 
