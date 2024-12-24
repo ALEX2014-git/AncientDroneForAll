@@ -17,18 +17,23 @@ using UnityEngine;
                 "CUSTOM ARTIFICER BOT CUTSCENE START (CTOR)"
                 });
                 this.room = room;
+                this.useCoordY = false;
+                this.SetTriggerCoords(player);
                 this.phase = CustomCutsceneArtificerRobo.Phase.Init;
                 this.bot = new AncientBot(new Vector2(650f, 192f), new Color(228f, 205f, 0f), null, false);
                 room.AddObject(this.bot);
             }
+
+
             public override void Update(bool eu)
             {
                 base.Update(eu);
             if (this.player == null || this.player?.room == null) return;
             if (this.player.room.abstractRoom.name != "UW_H01") return;
-            if (this.player.mainBodyChunk.pos.x > 840 && this.player.mainBodyChunk.pos.x < 270) return;
+            if (this.useCoordY && this.player.mainBodyChunk.pos.x < triggerX1 && this.player.mainBodyChunk.pos.x > triggerX2 && this.player.mainBodyChunk.pos.y > triggerY1 && this.player.mainBodyChunk.pos.y < triggerY2) return;
+            if (this.player.mainBodyChunk.pos.x < triggerX1 && this.player.mainBodyChunk.pos.x > triggerX2) return;
 
-                if (this.phase == CustomCutsceneArtificerRobo.Phase.Init)
+            if (this.phase == CustomCutsceneArtificerRobo.Phase.Init)
                 {
                     if (this.player != null && !this.initController && this.player.controller == null)
                     {
@@ -39,13 +44,13 @@ using UnityEngine;
                     }
                     if (this.initController)
                     {
-                        this.phase = CustomCutsceneArtificerRobo.Phase.PlayerRun;
+                        this.phase = CustomCutsceneArtificerRobo.Phase.ActivateRobo;
                         return;
                     }
                 }
                 else
                 {
-                    if (this.phase == CustomCutsceneArtificerRobo.Phase.PlayerRun || this.phase == CustomCutsceneArtificerRobo.Phase.ActivateRobo)
+                    if (this.phase == CustomCutsceneArtificerRobo.Phase.ActivateRobo)
                     {
                         this.cutsceneTimer++;
                         return;
@@ -60,7 +65,7 @@ using UnityEngine;
                         {
                             this.player.controller = null;
                         }
-                        this.room.game.cameras[0].hud.textPrompt.AddMessage(this.room.game.rainWorld.inGameTranslator.Translate("Default text lmao."), 20, 500, true, true);
+                        //this.room.game.cameras[0].hud.textPrompt.AddMessage(this.room.game.rainWorld.inGameTranslator.Translate("This ancient device may give you access to new areas."), 20, 500, true, true);
                         this.Destroy();
                     }
                 }
@@ -76,25 +81,7 @@ using UnityEngine;
                 bool jmp = false;
                 bool pckp = false;
                 bool thrw = false;
-                if (this.phase == CustomCutsceneArtificerRobo.Phase.PlayerRun)
-                {
-                if (this.player.mainBodyChunk.pos.x <= 600f)
-                {
-                    x = 1;
-                }
-                else x = -1;
-
-                    if ((!this.player.standing && this.cutsceneTimer % 2 == 0) || (this.player.mainBodyChunk.pos.y < 155))
-                    {
-                        y = 1;
-                    }
-                    if (this.player.mainBodyChunk.pos.x >= 570f && this.player.mainBodyChunk.pos.x <= 720f && this.player.mainBodyChunk.pos.y > 180f)
-                    {
-                        this.phase = CustomCutsceneArtificerRobo.Phase.ActivateRobo;
-                        this.cutsceneTimer = 0;
-                    }
-                }
-                else if (this.phase == CustomCutsceneArtificerRobo.Phase.ActivateRobo)
+                if (this.phase == CustomCutsceneArtificerRobo.Phase.ActivateRobo)
                 {
                     if (this.bot.myAnimation == AncientBot.Animation.IdleOffline && this.cutsceneTimer >= 45)
                     {
@@ -124,11 +111,37 @@ using UnityEngine;
                     return null;
                 }
             }
+
+        public void SetTriggerCoords(Player player)
+        {
+            triggerX1 = 630;
+            triggerX2 = 710;
+            triggerY1 = 0;
+            triggerY2 = 0;
+            if (player.slugcatStats.name == SlugcatStats.Name.White)
+            {
+                triggerX1 = 630;
+                triggerX2 = 710;
+                triggerY1 = 0;
+                triggerY2 = 0;
+            }
+            if (player.slugcatStats.name == SlugcatStats.Name.Yellow)
+            {
+                triggerX1 = 630;
+                triggerX2 = 710;
+                triggerY1 = 0;
+                triggerY2 = 0;
+            }
+        }
+
+
             public AncientBot bot;
             public bool initController;
             public CustomCutsceneArtificerRobo.Phase phase;
             public CustomCutsceneArtificerRobo.StartController startController;
             public int cutsceneTimer;
+            public float triggerX1, triggerX2, triggerY1, triggerY2; //X1 - left, X2 - right, Y1 - down, Y2 - up
+            public bool useCoordY;
             public class Phase : ExtEnum<CustomCutsceneArtificerRobo.Phase>
             {
                 public Phase(string value, bool register = false) : base(value, register)
@@ -136,8 +149,6 @@ using UnityEngine;
                 }
 
                 public static readonly CustomCutsceneArtificerRobo.Phase Init = new CustomCutsceneArtificerRobo.Phase("Init", true);
-
-                public static readonly CustomCutsceneArtificerRobo.Phase PlayerRun = new CustomCutsceneArtificerRobo.Phase("PlayerRun", true);
 
  
                 public static readonly CustomCutsceneArtificerRobo.Phase ActivateRobo = new CustomCutsceneArtificerRobo.Phase("ActivateRobo", true);

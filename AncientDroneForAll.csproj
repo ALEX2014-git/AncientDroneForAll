@@ -6,74 +6,80 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="References\**" />
+    <EmbeddedResource Remove="References\**" />
+    <None Remove="References\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\REFERENCES\0Harmony.dll</HintPath>
+      <HintPath>References\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="0Harmony20">
-      <HintPath>..\REFERENCES\0Harmony20.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\REFERENCES\PUBLIC-Assembly-CSharp.dll</HintPath>
+      <HintPath>References\0Harmony20.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\REFERENCES\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>References\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>..\REFERENCES\BepInEx.dll</HintPath>
+      <HintPath>References\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Harmony">
-      <HintPath>..\REFERENCES\BepInEx.Harmony.dll</HintPath>
+      <HintPath>References\BepInEx.Harmony.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Preloader">
-      <HintPath>..\REFERENCES\BepInEx.Preloader.dll</HintPath>
+      <HintPath>References\BepInEx.Preloader.dll</HintPath>
     </Reference>
     <Reference Include="com.rlabrecque.steamworks.net">
-      <HintPath>..\REFERENCES\com.rlabrecque.steamworks.net.dll</HintPath>
+      <HintPath>References\com.rlabrecque.steamworks.net.dll</HintPath>
     </Reference>
     <Reference Include="GoKit">
-      <HintPath>..\REFERENCES\GoKit.dll</HintPath>
+      <HintPath>References\GoKit.dll</HintPath>
     </Reference>
     <Reference Include="HarmonyXInterop">
-      <HintPath>..\REFERENCES\HarmonyXInterop.dll</HintPath>
+      <HintPath>References\HarmonyXInterop.dll</HintPath>
     </Reference>
     <Reference Include="HOOKS-Assembly-CSharp">
-      <HintPath>..\REFERENCES\HOOKS-Assembly-CSharp.dll</HintPath>
+      <HintPath>References\HOOKS-Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>..\REFERENCES\Mono.Cecil.dll</HintPath>
+      <HintPath>References\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>..\REFERENCES\Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>References\Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>..\REFERENCES\Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>References\Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>..\REFERENCES\Mono.Cecil.Rocks.dll</HintPath>
+      <HintPath>References\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod">
-      <HintPath>..\REFERENCES\MonoMod.dll</HintPath>
+      <HintPath>References\MonoMod.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>..\REFERENCES\MonoMod.RuntimeDetour.dll</HintPath>
+      <HintPath>References\MonoMod.RuntimeDetour.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.Utils">
-      <HintPath>..\REFERENCES\MonoMod.Utils.dll</HintPath>
+      <HintPath>References\MonoMod.Utils.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>References\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>References\PUBLIC-Assembly-CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\REFERENCES\UnityEngine.dll</HintPath>
+      <HintPath>References\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\REFERENCES\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>References\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>..\REFERENCES\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>References\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\REFERENCES\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>References\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
   </ItemGroup>
 
