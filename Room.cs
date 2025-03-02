@@ -5,11 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using BepInEx.Logging;
 using MoreSlugcats;
+using RWCustom;
+using UnityEngine;
+using CoralBrain;
+using Noise;
 
 namespace AncientDroneForAll
 {
     public partial class AncientDroneForAll
     {
+        Room myRoom;
         private void Room_Loaded(On.Room.orig_Loaded orig, Room self)
         {
             orig(self);

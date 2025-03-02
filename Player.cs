@@ -32,11 +32,12 @@ namespace AncientDroneForAll
                         Logger.LogMessage($"scareObj lifetime: {(obj as CustomCutsceneArtificerRobo).scareObj.lifeTime}");                       
                     }
                 }
-                
+
 
                 foreach (AbstractCreature creature in self.room.abstractRoom.creatures)
                 {
-                    if (creature.realizedCreature.Blinded || creature.realizedCreature.Deaf > 0)
+                    if (creature.realizedCreature != null &&
+                        (creature.realizedCreature.Blinded || creature.realizedCreature.Deaf > 0))
                     {
                         Logger.LogMessage($"Creature {creature.realizedCreature} is blind for {creature.realizedCreature.blind}");
                         Logger.LogMessage($"Creature {creature.realizedCreature} is deaf for {creature.realizedCreature.deaf}");
