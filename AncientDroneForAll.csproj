@@ -6,6 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="References\**" />
+    <EmbeddedResource Remove="References\**" />
+    <None Remove="References\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>..\REFERENCES\0Harmony.dll</HintPath>
     </Reference>
@@ -62,6 +72,12 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>References\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>References\PUBLIC-Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>References\Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\REFERENCES\UnityEngine.dll</HintPath>
